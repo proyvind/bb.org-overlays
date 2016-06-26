@@ -1,0 +1,42 @@
+/*
+ * Copyright (C) 2013 CircuitCo
+ *
+ * Virtual cape for SPI1 (ALT #1) on connector pins
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "ti,beaglebone", "ti,beaglebone-black", "ti,beaglebone-green", "ti,unicron";
+
+	/* identification */
+	part-number = "BB-SPI0-MAX6675";
+	version = "00A0";
+
+	fragment@0 {
+		target = <&spi0>;
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			status = "okay";
+			channel@0 {
+				#address-cells = <1>;
+				#size-cells = <0>;
+				max6675@0 {
+					#address-cells = <1>;
+					#size-cells = <0>;
+
+					compatible = "maxim,max6675";
+					reg = <0>;
+					spi-max-frequency = <4300000>;
+					spi-cpha;
+				};
+			};
+		};
+	};
+};
